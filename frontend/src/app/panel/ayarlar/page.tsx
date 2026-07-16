@@ -1,18 +1,26 @@
 'use client';
 
-import { useState } from 'react';
-import { Save, Bell, Lock, Trash2 } from 'lucide-react';
-import { Button, Card, Input } from '@/components/ui';
+import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
+import { Save, Bell, Lock, Trash2, Palette, Languages } from 'lucide-react';
+import { Button, Card } from '@/components/ui';
 import { useAuth } from '@/hooks/useAuth';
+import { useTranslation } from '@/i18n';
+import { LanguageSelector } from '@/components/layout';
 
 export default function SettingsPage() {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
+  const { t } = useTranslation();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [notifications, setNotifications] = useState({
     email: true,
     push: false,
     messages: true,
     orders: true,
   });
+
+  useEffect(() => setMounted(true), []);
 
   const handleDeleteAccount = () => {
     if (confirm('Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.')) {
@@ -25,7 +33,55 @@ export default function SettingsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Ayarlar</h1>
+      <h1 className="text-2xl font-bold">{t('nav.settings')}</h1>
+
+      {/* Appearance */}
+      <Card variant="bordered">
+        <div className="flex items-center gap-3 mb-4">
+          <Palette className="w-5 h-5 text-[var(--primary)]" />
+          <h2 className="font-semibold">{t('prefs.appearance')}</h2>
+        </div>
+
+        <div className="space-y-6">
+          <div>
+            <p className="font-medium mb-3">{t('prefs.theme')}</p>
+            <div className="flex flex-wrap gap-2">
+              {(
+                [
+                  { value: 'light', label: t('prefs.themeLight') },
+                  { value: 'dark', label: t('prefs.themeDark') },
+                  { value: 'system', label: t('prefs.themeSystem') },
+                ] as const
+              ).map((option) => {
+                const active = mounted && theme === option.value;
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    onClick={() => setTheme(option.value)}
+                    className={`px-4 py-2 rounded-xl border text-sm font-medium transition-colors ${
+                      active
+                        ? 'border-[var(--primary)] bg-[var(--primary)] text-white'
+                        : 'border-[var(--border)] hover:bg-[var(--border)]/60'
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <Languages className="w-4 h-4 text-[var(--primary)]" />
+              <p className="font-medium">{t('prefs.language')}</p>
+            </div>
+            <p className="text-sm text-[var(--muted)] mb-3">{t('prefs.languageHint')}</p>
+            <LanguageSelector variant="list" />
+          </div>
+        </div>
+      </Card>
 
       {/* Notifications */}
       <Card variant="bordered">

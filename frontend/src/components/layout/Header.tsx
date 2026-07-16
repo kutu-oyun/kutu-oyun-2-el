@@ -22,14 +22,17 @@ import { Button, Input } from '@/components/ui';
 import { userAtom, isLoadingAuthAtom } from '@/atoms/auth';
 import { cartCountAtom } from '@/atoms/cart';
 import { useAuth } from '@/hooks/useAuth';
+import { useTranslation } from '@/i18n';
+import ThemeToggle from './ThemeToggle';
+import LanguageSelector from './LanguageSelector';
 
-const categories = [
-  { name: 'Strateji', slug: 'strateji' },
-  { name: 'Aile', slug: 'aile' },
-  { name: 'Parti', slug: 'parti' },
-  { name: 'Kart', slug: 'kart' },
-  { name: 'Çocuk', slug: 'cocuk' },
-  { name: 'Kooperatif', slug: 'kooperatif' },
+const categoryDefs = [
+  { key: 'cat.strategy' as const, slug: 'strateji' },
+  { key: 'cat.family' as const, slug: 'aile' },
+  { key: 'cat.party' as const, slug: 'parti' },
+  { key: 'cat.card' as const, slug: 'kart' },
+  { key: 'cat.kids' as const, slug: 'cocuk' },
+  { key: 'cat.cooperative' as const, slug: 'kooperatif' },
 ];
 
 export default function Header() {
@@ -37,6 +40,7 @@ export default function Header() {
   const isLoading = useAtomValue(isLoadingAuthAtom);
   const cartCount = useAtomValue(cartCountAtom);
   const { logout } = useAuth();
+  const { t } = useTranslation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -67,7 +71,7 @@ export default function Header() {
           <form onSubmit={handleSearch} className="flex-1 max-w-2xl">
             <Input
               type="search"
-              placeholder="Kutu oyunu ara..."
+              placeholder={t('nav.searchPlaceholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               leftIcon={<Search className="w-5 h-5" />}
@@ -78,11 +82,14 @@ export default function Header() {
           {/* Location (Desktop) */}
           <button className="hidden lg:flex items-center gap-2 text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
             <MapPin className="w-4 h-4" />
-            <span>İstanbul, Türkiye</span>
+            <span>{t('nav.location')}</span>
           </button>
 
           {/* Actions */}
           <div className="flex items-center gap-2">
+            <LanguageSelector />
+            <ThemeToggle />
+
             {/* Cart */}
             <Link href="/sepet" className="relative p-2 hover:bg-[var(--border)] rounded-lg transition-colors">
               <ShoppingCart className="w-6 h-6" />
@@ -116,7 +123,7 @@ export default function Header() {
                     </div>
                   )}
                   <span className="hidden md:block text-sm font-medium max-w-[100px] truncate">
-                    {user.displayName || 'Hesabım'}
+                    {user.displayName || t('nav.myAccount')}
                   </span>
                 </button>
 
@@ -127,9 +134,9 @@ export default function Header() {
                       className="fixed inset-0 z-10"
                       onClick={() => setIsProfileMenuOpen(false)}
                     />
-                    <div className="absolute right-0 top-full mt-2 w-56 bg-[var(--card)] rounded-xl shadow-lg border border-[var(--border)] py-2 z-20">
+                    <div className="absolute end-0 top-full mt-2 w-56 bg-[var(--card)] rounded-xl shadow-lg border border-[var(--border)] py-2 z-20">
                       <div className="px-4 py-2 border-b border-[var(--border)]">
-                        <p className="font-medium truncate">{user.displayName || 'Kullanıcı'}</p>
+                        <p className="font-medium truncate">{user.displayName || t('nav.user')}</p>
                         <p className="text-sm text-[var(--muted)] truncate">{user.email}</p>
                       </div>
                       <Link
@@ -138,7 +145,7 @@ export default function Header() {
                         onClick={() => setIsProfileMenuOpen(false)}
                       >
                         <Package className="w-4 h-4" />
-                        <span>İlanlarım</span>
+                        <span>{t('nav.myListings')}</span>
                       </Link>
                       <Link
                         href="/panel/siparisler"
@@ -146,7 +153,7 @@ export default function Header() {
                         onClick={() => setIsProfileMenuOpen(false)}
                       >
                         <ShoppingCart className="w-4 h-4" />
-                        <span>Siparişlerim</span>
+                        <span>{t('nav.myOrders')}</span>
                       </Link>
                       <Link
                         href="/panel/favoriler"
@@ -154,7 +161,7 @@ export default function Header() {
                         onClick={() => setIsProfileMenuOpen(false)}
                       >
                         <Heart className="w-4 h-4" />
-                        <span>Favorilerim</span>
+                        <span>{t('nav.myFavorites')}</span>
                       </Link>
                       <Link
                         href="/panel/mesajlar"
@@ -162,7 +169,7 @@ export default function Header() {
                         onClick={() => setIsProfileMenuOpen(false)}
                       >
                         <MessageSquare className="w-4 h-4" />
-                        <span>Mesajlarım</span>
+                        <span>{t('nav.myMessages')}</span>
                       </Link>
                       <Link
                         href="/panel/ayarlar"
@@ -170,7 +177,7 @@ export default function Header() {
                         onClick={() => setIsProfileMenuOpen(false)}
                       >
                         <Settings className="w-4 h-4" />
-                        <span>Ayarlar</span>
+                        <span>{t('nav.settings')}</span>
                       </Link>
                       <div className="border-t border-[var(--border)] mt-2 pt-2">
                         <button
@@ -181,7 +188,7 @@ export default function Header() {
                           className="flex items-center gap-3 px-4 py-2.5 w-full text-left text-[var(--error)] hover:bg-[var(--border)] transition-colors"
                         >
                           <LogOut className="w-4 h-4" />
-                          <span>Çıkış Yap</span>
+                          <span>{t('nav.logout')}</span>
                         </button>
                       </div>
                     </div>
@@ -192,7 +199,7 @@ export default function Header() {
               <Link href="/giris">
                 <Button variant="outline" size="sm">
                   <User className="w-4 h-4" />
-                  <span className="hidden sm:inline">Giriş Yap</span>
+                  <span className="hidden sm:inline">{t('nav.login')}</span>
                 </Button>
               </Link>
             )}
@@ -201,7 +208,7 @@ export default function Header() {
             <Link href="/ilan-olustur" className="hidden sm:block">
               <Button size="sm">
                 <Plus className="w-4 h-4" />
-                <span>Sat</span>
+                <span>{t('nav.sell')}</span>
               </Button>
             </Link>
 
@@ -230,16 +237,16 @@ export default function Header() {
                 className="flex items-center gap-2 px-4 py-3 text-sm font-medium hover:text-[var(--primary)] transition-colors"
               >
                 <Menu className="w-4 h-4" />
-                Tüm Kategoriler
+                {t('nav.allCategories')}
               </Link>
             </li>
-            {categories.map((cat) => (
+            {categoryDefs.map((cat) => (
               <li key={cat.slug}>
                 <Link
                   href={`/urunler?category=${cat.slug}`}
                   className="px-4 py-3 text-sm hover:text-[var(--primary)] transition-colors block"
                 >
-                  {cat.name}
+                  {t(cat.key)}
                 </Link>
               </li>
             ))}
@@ -254,29 +261,29 @@ export default function Header() {
             {/* Location */}
             <button className="flex items-center gap-2 text-sm text-[var(--muted)]">
               <MapPin className="w-4 h-4" />
-              <span>İstanbul, Türkiye</span>
+              <span>{t('nav.location')}</span>
             </button>
 
             {/* Categories */}
             <div className="space-y-1">
               <p className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider mb-2">
-                Kategoriler
+                {t('nav.categories')}
               </p>
               <Link
                 href="/urunler"
                 className="block px-3 py-2 rounded-lg hover:bg-[var(--border)] transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Tüm Kategoriler
+                {t('nav.allCategories')}
               </Link>
-              {categories.map((cat) => (
+              {categoryDefs.map((cat) => (
                 <Link
                   key={cat.slug}
                   href={`/urunler?category=${cat.slug}`}
                   className="block px-3 py-2 rounded-lg hover:bg-[var(--border)] transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {cat.name}
+                  {t(cat.key)}
                 </Link>
               ))}
             </div>
@@ -285,7 +292,7 @@ export default function Header() {
             <Link href="/ilan-olustur" className="block" onClick={() => setIsMobileMenuOpen(false)}>
               <Button className="w-full">
                 <Plus className="w-4 h-4" />
-                <span>Ücretsiz İlan Ver</span>
+                <span>{t('nav.sellFree')}</span>
               </Button>
             </Link>
           </div>

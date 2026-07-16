@@ -2,8 +2,11 @@
 
 import Link from 'next/link';
 import { Dice5, Facebook, Twitter, Instagram, Mail } from 'lucide-react';
+import { useTranslation } from '@/i18n';
 
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-[var(--secondary)] text-white mt-auto">
       <div className="max-w-7xl mx-auto px-4 py-12">
@@ -17,8 +20,7 @@ export default function Footer() {
               <span className="text-xl font-bold">KutuOyun</span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Türkiye'nin en büyük 2. el kutu oyun pazaryeri. Güvenli alışveriş,
-              uygun fiyatlar, geniş oyun seçeneği.
+              {t('footer.tagline')}
             </p>
             <div className="flex items-center gap-3 mt-4">
               <a
@@ -44,36 +46,36 @@ export default function Footer() {
 
           {/* Categories */}
           <div>
-            <h3 className="font-semibold mb-4">Kategoriler</h3>
+            <h3 className="font-semibold mb-4">{t('footer.categories')}</h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
                 <Link href="/urunler?category=strateji" className="hover:text-white transition-colors">
-                  Strateji Oyunları
+                  {t('footer.cat.strategy')}
                 </Link>
               </li>
               <li>
                 <Link href="/urunler?category=aile" className="hover:text-white transition-colors">
-                  Aile Oyunları
+                  {t('footer.cat.family')}
                 </Link>
               </li>
               <li>
                 <Link href="/urunler?category=parti" className="hover:text-white transition-colors">
-                  Parti Oyunları
+                  {t('footer.cat.party')}
                 </Link>
               </li>
               <li>
                 <Link href="/urunler?category=kart" className="hover:text-white transition-colors">
-                  Kart Oyunları
+                  {t('footer.cat.card')}
                 </Link>
               </li>
               <li>
                 <Link href="/urunler?category=cocuk" className="hover:text-white transition-colors">
-                  Çocuk Oyunları
+                  {t('footer.cat.kids')}
                 </Link>
               </li>
               <li>
                 <Link href="/urunler" className="hover:text-white transition-colors">
-                  Tüm Kategoriler
+                  {t('footer.cat.all')}
                 </Link>
               </li>
             </ul>
@@ -81,31 +83,31 @@ export default function Footer() {
 
           {/* Help */}
           <div>
-            <h3 className="font-semibold mb-4">Yardım</h3>
+            <h3 className="font-semibold mb-4">{t('footer.help')}</h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
                 <Link href="/nasil-calisir" className="hover:text-white transition-colors">
-                  Nasıl Çalışır?
+                  {t('footer.howItWorks')}
                 </Link>
               </li>
               <li>
                 <Link href="/guvenli-alisveris" className="hover:text-white transition-colors">
-                  Güvenli Alışveriş
+                  {t('footer.safeShopping')}
                 </Link>
               </li>
               <li>
                 <Link href="/sss" className="hover:text-white transition-colors">
-                  Sık Sorulan Sorular
+                  {t('footer.faq')}
                 </Link>
               </li>
               <li>
                 <Link href="/iade-politikasi" className="hover:text-white transition-colors">
-                  İade Politikası
+                  {t('footer.returns')}
                 </Link>
               </li>
               <li>
                 <Link href="/iletisim" className="hover:text-white transition-colors">
-                  İletişim
+                  {t('footer.contact')}
                 </Link>
               </li>
             </ul>
@@ -113,7 +115,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold mb-4">İletişim</h3>
+            <h3 className="font-semibold mb-4">{t('footer.contactTitle')}</h3>
             <ul className="space-y-3 text-sm text-gray-400">
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
@@ -123,7 +125,7 @@ export default function Footer() {
               </li>
             </ul>
             <div className="mt-6">
-              <h4 className="font-medium text-sm mb-2">Güvenli Ödeme</h4>
+              <h4 className="font-medium text-sm mb-2">{t('footer.securePayment')}</h4>
               <div className="flex items-center gap-2">
                 <div className="w-12 h-8 bg-white/10 rounded flex items-center justify-center text-xs">
                   iyzico
@@ -141,13 +143,13 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-white/10 mt-8 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
-          <p>© 2024 KutuOyun. Tüm hakları saklıdır.</p>
+          <p>{t('footer.rights')}</p>
           <div className="flex items-center gap-4">
             <Link href="/gizlilik" className="hover:text-white transition-colors">
-              Gizlilik Politikası
+              {t('footer.privacy')}
             </Link>
             <Link href="/kullanim-kosullari" className="hover:text-white transition-colors">
-              Kullanım Koşulları
+              {t('footer.terms')}
             </Link>
           </div>
         </div>
