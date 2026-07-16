@@ -1,0 +1,31 @@
+{
+  "centralRepo": "git@github.com:Hasan-Vural/website-logic.git",
+  "cachePath": "%USERPROFILE%\\.website-logic-cache",
+  "projects": {
+    "Edura-Academy/edura": {
+      "key": "edura",
+      "projectDocsPath": "public/edura",
+      "visibility": "public"
+    },
+    "Hasan-Vural/hasanvuralcom": {
+      "key": "hasanvuralcom",
+      "projectDocsPath": "private/hasanvuralcom",
+      "visibility": "private"
+    },
+    "Hasan-Vural/bhmcontrol": {
+      "key": "bhmcontrol",
+      "projectDocsPath": "private/bhmcontrol",
+      "visibility": "private"
+    },
+    "Hasan-Vural/godiva-elix": {
+      "key": "godiva-elix",
+      "projectDocsPath": "private/godiva-elix",
+      "visibility": "private"
+    },
+    "kutu-oyun/kutu-oyun-2-el": {
+      "key": "kutuly",
+      "projectDocsPath": "public/kutuly",
+      "visibility": "public"
+    }
+  }
+}

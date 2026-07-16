@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CURATOR | Kıdemli Yazılım Geliştirici Portfolyosu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#effcf8",
+                        "secondary": "#0051d5",
+                        "surface-container-highest": "#d8e5e1",
+                        "inverse-surface": "#273330",
+                        "on-surface": "#121e1c",
+                        "surface-bright": "#effcf8",
+                        "surface-container-low": "#e9f6f2",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#006e2f",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#0ea5a4",
+                        "secondary-fixed": "#dbe1ff",
+                        "inverse-primary": "#5ed9d7",
+                        "surface-container-high": "#deebe7",
+                        "tertiary-fixed": "#6bff8f",
+                        "surface-tint": "#006a69",
+                        "on-background": "#121e1c",
+                        "on-secondary-container": "#fefcff",
+                        "surface-variant": "#d8e5e1",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#effcf8",
+                        "on-primary-fixed-variant": "#00504f",
+                        "on-secondary-fixed": "#00174b",
+                        "outline-variant": "#bcc9c8",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "primary-fixed": "#7df5f4",
+                        "on-primary-container": "#003333",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#b4c5ff",
+                        "on-tertiary-fixed": "#002109",
+                        "primary": "#006a69",
+                        "inverse-on-surface": "#e7f4f0",
+                        "on-primary": "#ffffff",
+                        "outline": "#6d7a79",
+                        "on-surface-variant": "#3d4949",
+                        "on-secondary-fixed-variant": "#003ea8",
+                        "secondary-container": "#316bf3",
+                        "tertiary-container": "#00ab4d",
+                        "on-tertiary-container": "#003513",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#5ed9d7",
+                        "surface-dim": "#d0ddd9",
+                        "on-primary-fixed": "#002020",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "surface-container": "#e4f1ed"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #effcf8; color: #121e1c; scroll-behavior: smooth; }
+        .headline-font { font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.02em; }
+        .glass-nav { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+        .hero-gradient { background: linear-gradient(135deg, #22C55E, #14B8A6, #3B82F6); background-size: 200% 200%; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .custom-scrollbar::-webkit-scrollbar { height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #0ea5a4; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl shadow-sm">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-black tracking-tighter text-teal-700 headline-font">CURATOR</div>
+<!-- Desktop Nav -->
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 font-medium hover:text-teal-600 transition-colors hover:scale-105 duration-300" href="#about">About</a>
+<a class="text-teal-700 font-bold border-b-2 border-teal-500 pb-1 hover:scale-105 transition-transform duration-300" href="#projects">Projects</a>
+<a class="text-slate-600 font-medium hover:text-teal-600 transition-colors hover:scale-105 duration-300" href="#education">Education</a>
+<a class="text-slate-600 font-medium hover:text-teal-600 transition-colors hover:scale-105 duration-300" href="#books">Books</a>
+<a class="text-slate-600 font-medium hover:text-teal-600 transition-colors hover:scale-105 duration-300" href="#contact">Contact</a>
+<button class="bg-primary px-6 py-2 rounded-full text-on-primary font-bold hover:scale-105 transition-transform duration-300">Hire Me</button>
+</div>
+<!-- Mobile Menu Toggle (Simplified for UI) -->
+<div class="md:hidden">
+<span class="material-symbols-outlined text-primary text-3xl">menu</span>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex items-center px-8 overflow-hidden">
+<div class="absolute inset-0 hero-gradient opacity-10 blur-3xl -z-10"></div>
+<div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-container/10 border border-primary-container/20 text-primary font-semibold text-sm">
+<span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+                        Yeni Projelere Açık
+                    </div>
+<h1 class="text-6xl md:text-8xl headline-font font-extrabold text-on-surface leading-tight">
+                        Caner <span class="text-transparent bg-clip-text hero-gradient">Yılmaz</span>
+</h1>
+<p class="text-2xl text-on-surface-variant font-medium headline-font">Kıdemli Yazılım Geliştirici</p>
+<p class="text-lg text-on-surface-variant/80 max-w-lg leading-relaxed">
+                        Karmaşık problemleri zarif çözümlere dönüştüren, ölçeklenebilir ve performans odaklı sistemler mimarı.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="bg-primary text-on-primary px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:scale-105 transition-transform shadow-lg shadow-primary/20" href="#projects">
+                            Projelerimi Gör
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+<a class="bg-surface-container-high text-on-surface px-8 py-4 rounded-xl font-bold hover:bg-surface-container-highest transition-colors" href="#contact">
+                            İletişime Geç
+                        </a>
+</div>
+</div>
+<div class="relative hidden md:block">
+<div class="aspect-square rounded-3xl overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700 bg-surface-container-high">
+<img alt="Caner Yılmaz Profile" class="w-full h-full object-cover" data-alt="Professional portrait of a middle-aged man with short dark hair and a confident smile, clean studio background, warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMZBZ1L_6ep1gZMPVLn9mBU3VusLrwaCepJVlCk-BdpZIdQPahnKu9GsnQo2j57u7H2XWOZ0ZsM7RsnzHQf8c9yEaSp22s1CNVxPRRGFTbmlM33qaVLLQSgrboaidVpzDcXIg0JICcSDw6UlcOiG-pIAMbIwNbkNbmv0HtU7lm0ox8G_zCDlXDXWZt4-FOQmuNH0hY86Aq22SmYUYjt0vhMrMMdFBedV4Z9Ht8eDTkUq9ttwXlwCjdIdLQa5Nhj7--cMJYSUCx33AF"/>
+</div>
+<div class="absolute -bottom-6 -left-6 bg-surface-container-lowest p-6 rounded-2xl shadow-xl border border-outline-variant/20 max-w-[200px]">
+<p class="text-primary font-black text-3xl">10+</p>
+<p class="text-sm font-bold opacity-70 uppercase tracking-wider">Yıllık Deneyim</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Hakkımda Section -->
+<section class="py-24 px-8 bg-surface-container-low" id="about">
+<div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-16 items-start">
+<div class="md:col-span-5">
+<h2 class="text-4xl headline-font font-bold mb-6 flex items-center gap-4">
+<span class="w-12 h-[2px] bg-primary"></span>
+                        Hakkımda
+                    </h2>
+<p class="text-4xl md:text-5xl headline-font font-extrabold text-on-surface/20 leading-tight">
+                        Mükemmellik bir eylem değil, bir alışkanlıktır.
+                    </p>
+</div>
+<div class="md:col-span-7 space-y-8 text-lg text-on-surface-variant leading-relaxed">
+<p>
+                        Yazılım geliştirmeye olan tutkum, sadece kod yazmak değil, insanların hayatını kolaylaştıran dijital ekosistemler inşa etmektir. Teknik mükemmelliği ve kullanıcı deneyimini merkeze alarak, karmaşık backend mimarilerinden etkileşimli frontend arayüzlerine kadar geniş bir yelpazede çözümler üretiyorum.
+                    </p>
+<p>
+                        Problem çözme yeteneğim ve analitik düşünme yapım sayesinde, projelerin teknik borçlarını minimize eden ve gelecek vizyonuna hizmet eden sürdürülebilir sistemler tasarlıyorum.
+                    </p>
+<div class="grid grid-cols-2 gap-8 pt-6">
+<div>
+<p class="text-primary font-bold text-xl">Stratejik Odak</p>
+<p class="text-sm">İş hedefleriyle teknik gereksinimlerin kusursuz uyumu.</p>
+</div>
+<div>
+<p class="text-primary font-bold text-xl">Teknik Liderlik</p>
+<p class="text-sm">Modern stack ve best practice'lerin ekiplere entegrasyonu.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Projeler Section (Carousel) -->
+<section class="py-24 px-8 overflow-hidden" id="projects">
+<div class="max-w-7xl mx-auto flex justify-between items-end mb-12">
+<div>
+<h2 class="text-4xl headline-font font-bold mb-4">Öne Çıkan Projeler</h2>
+<p class="text-on-surface-variant">Tutkuyla inşa edilen seçkin dijital eserler.</p>
+</div>
+<div class="flex gap-4">
+<button class="w-12 h-12 rounded-full border border-primary text-primary flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-12 h-12 rounded-full border border-primary text-primary flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-8 overflow-x-auto pb-12 px-4 custom-scrollbar snap-x">
+<!-- Project Card 1 -->
+<div class="min-w-[400px] md:min-w-[500px] snap-start group">
+<div class="bg-surface-container-low rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-outline-variant/10">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Modern minimalist dashboard interface design with vibrant charts and dark mode aesthetic, high contrast blue and purple accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3mOhb2hRtzqopoEW4X5KSO3yd6hgkwyHemP97V8KqdJP7VoHRsgxNBZF-mPXNptm32e15GBYqVSOGGPR1yqtGyHKmDIWW1-cgcYcp7PnlTJQSo8wcVHE9JSGMVWm-I1bqRdhob5kcOO3vlSjyUDpFkfPS6EfV_Gf-FmUk5h5bgwi_BlZyjVASxHoki156YT_SfqG9C6IzQETVYA4hHyXhM6WNJRGksmsIPRgIWJVC_w4vM5gdN_NKN2_B7pdZGFfueY17WGHTMp2t"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+<span class="text-white font-bold">Fintech Çözümü</span>
+</div>
+</div>
+<div class="p-8">
+<h3 class="text-2xl font-bold headline-font mb-3">Nebula Dashboard</h3>
+<p class="text-on-surface-variant mb-6 line-clamp-2">Gerçek zamanlı veri analitiği sunan, yüksek performanslı ve modüler SaaS yönetim paneli.</p>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-xs font-bold rounded-full">React</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-xs font-bold rounded-full">Node.js</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-xs font-bold rounded-full">GraphQL</span>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 bg-primary text-on-primary py-3 rounded-xl font-bold text-sm hover:opacity-90">Canlı Demo</button>
+<button class="flex-1 bg-surface-container-high py-3 rounded-xl font-bold text-sm hover:bg-surface-container-highest">Kaynak Kod</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="min-w-[400px] md:min-w-[500px] snap-start group">
+<div class="bg-surface-container-low rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-outline-variant/10">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Premium e-commerce website product page showing elegant watches with clean typography and soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtArrO2tKIfMCHuK2cVt9xJ2eoweDFF4HaAV9PmS5Lj3bGN2YZ59B7Jp1aym4tf0J8Cl6MidmQfV-7LrdcLShn9GSidDquY71sWQWBRpi4VtM_X4gojI70ABUvsDE8d963uFeCFmO0nKTWuie7P_wdyGsM2VIUA7mEQuiYTtknGxKdcdDU8u_6jIQr9XW3x3r9rdGc2OZHMc4z0QKc21MHMsXAbXiUwO-wpESzjraiJEf9Olowwd_s9Lo3GlsIIPHKkpodVFjByjox"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+<span class="text-white font-bold">E-Ticaret</span>
+</div>
+</div>
+<div class="p-8">
+<h3 class="text-2xl font-bold headline-font mb-3">Luxe Mart</h3>
+<p class="text-on-surface-variant mb-6 line-clamp-2">Lüks ürün segmenti için özel olarak tasarlanmış, headless commerce altyapısına sahip mağaza.</p>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-xs font-bold rounded-full">Next.js</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-xs font-bold rounded-full">Shopify API</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-xs font-bold rounded-full">Tailwind</span>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 bg-primary text-on-primary py-3 rounded-xl font-bold text-sm hover:opacity-90">Canlı Demo</button>
+<button class="flex-1 bg-surface-container-high py-3 rounded-xl font-bold text-sm hover:bg-surface-container-highest">Kaynak Kod</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="min-w-[400px] md:min-w-[500px] snap-start group">
+<div class="bg-surface-container-low rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-outline-variant/10">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Futuristic mobile app UI mockup for a crypto wallet with neon gradients and smooth glass surfaces" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAY3ZKNEJh4bHznsPi3blnBfDuF_XnJOrGL-q8m_YHZXNS24qJ832SsDrBoNAclWqfjqvyfDbdRF5JK3fqQtaX7jpge15yZDT6LMttvfBV_2Pc6pr7ayHyW76A-dtigO2OXYIKyhTR6mJx6ihAOeav72v2OiXpCxjU6buPhV4vxGQwEQXGo0mhQolLa96AsdQip6JWwSd3Ka-nhONSUPTFNnWLT-rQEaL_9UkQBM43bq-8E4C83Q1_rh6e2PevN3S58NXwguANOw2-"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+<span class="text-white font-bold">Web3 / Crypto</span>
+</div>
+</div>
+<div class="p-8">
+<h3 class="text-2xl font-bold headline-font mb-3">Titan Wallet</h3>
+<p class="text-on-surface-variant mb-6 line-clamp-2">Güvenli, hızlı ve kullanıcı dostu bir kripto varlık yönetim mobil cüzdan uygulaması.</p>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-xs font-bold rounded-full">Flutter</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-xs font-bold rounded-full">Solidity</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-xs font-bold rounded-full">Firebase</span>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 bg-primary text-on-primary py-3 rounded-xl font-bold text-sm hover:opacity-90">Canlı Demo</button>
+<button class="flex-1 bg-surface-container-high py-3 rounded-xl font-bold text-sm hover:bg-surface-container-highest">Kaynak Kod</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Yetenekler Section (Chip Matrix) -->
+<section class="py-24 px-8 bg-surface-container">
+<div class="max-w-4xl mx-auto text-center mb-16">
+<h2 class="text-4xl headline-font font-bold mb-6">Yetenek Matrisi</h2>
+<p class="text-on-surface-variant">Sürekli evrilen teknik stack ve metodolojik uzmanlık alanlarım.</p>
+</div>
+<div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-4">
+<div class="px-6 py-3 bg-surface-container-lowest rounded-full border border-primary/20 shadow-sm flex items-center gap-3 group hover:border-primary transition-colors cursor-default">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-bold text-on-surface">JavaScript ES6+</span>
+</div>
+<div class="px-6 py-3 bg-surface-container-lowest rounded-full border border-primary/20 shadow-sm flex items-center gap-3 group hover:border-primary transition-colors cursor-default">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-bold text-on-surface">TypeScript</span>
+</div>
+<div class="px-6 py-3 bg-surface-container-lowest rounded-full border border-primary/20 shadow-sm flex items-center gap-3 group hover:border-primary transition-colors cursor-default">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-bold text-on-surface">React &amp; Next.js</span>
+</div>
+<div class="px-6 py-3 bg-surface-container-lowest rounded-full border border-primary/20 shadow-sm flex items-center gap-3 group hover:border-primary transition-colors cursor-default">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-bold text-on-surface">Node.js / Express</span>
+</div>
+<div class="px-6 py-3 bg-surface-container-lowest rounded-full border border-primary/20 shadow-sm flex items-center gap-3 group hover:border-primary transition-colors cursor-default">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-bold text-on-surface">PostgreSQL</span>
+</div>
+<div class="px-6 py-3 bg-surface-container-lowest rounded-full border border-primary/20 shadow-sm flex items-center gap-3 group hover:border-primary transition-colors cursor-default">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-bold text-on-surface">Docker &amp; K8s</span>
+</div>
+<div class="px-6 py-3 bg-surface-container-lowest rounded-full border border-primary/20 shadow-sm flex items-center gap-3 group hover:border-primary transition-colors cursor-default">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-bold text-on-surface">AWS Cloud</span>
+</div>
+<div class="px-6 py-3 bg-surface-container-lowest rounded-full border border-primary/20 shadow-sm flex items-center gap-3 group hover:border-primary transition-colors cursor-default">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-bold text-on-surface">CI/CD Pipelines</span>
+</div>
+<div class="px-6 py-3 bg-surface-container-lowest rounded-full border border-secondary/20 shadow-sm flex items-center gap-3 group hover:border-secondary transition-colors cursor-default">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-bold text-on-surface">Agile / Scrum</span>
+</div>
+<div class="px-6 py-3 bg-surface-container-lowest rounded-full border border-secondary/20 shadow-sm flex items-center gap-3 group hover:border-secondary transition-colors cursor-default">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-bold text-on-surface">System Design</span>
+</div>
+<div class="px-6 py-3 bg-surface-container-lowest rounded-full border border-secondary/20 shadow-sm flex items-center gap-3 group hover:border-secondary transition-colors cursor-default">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-bold text-on-surface">Mentoring</span>
+</div>
+</div>
+</section>
+<!-- Eğitim & Sertifikalar Section -->
+<section class="py-24 px-8 max-w-7xl mx-auto grid md:grid-cols-2 gap-16" id="education">
+<div>
+<h2 class="text-3xl headline-font font-bold mb-10 flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">school</span>
+                    Eğitim
+                </h2>
+<div class="space-y-8 relative before:absolute before:left-[11px] before:top-2 before:bottom-0 before:w-[2px] before:bg-outline-variant/30">
+<div class="pl-10 relative">
+<div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-primary border-4 border-surface shadow-sm"></div>
+<p class="text-sm font-bold text-primary mb-1">2016 - 2018</p>
+<h4 class="text-xl font-bold headline-font">Bilgisayar Mühendisliği (Yüksek Lisans)</h4>
+<p class="text-on-surface-variant">İstanbul Teknik Üniversitesi</p>
+</div>
+<div class="pl-10 relative">
+<div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-primary border-4 border-surface shadow-sm"></div>
+<p class="text-sm font-bold text-primary mb-1">2011 - 2015</p>
+<h4 class="text-xl font-bold headline-font">Yazılım Mühendisliği (Lisans)</h4>
+<p class="text-on-surface-variant">Orta Doğu Teknik Üniversitesi</p>
+</div>
+</div>
+</div>
+<div>
+<h2 class="text-3xl headline-font font-bold mb-10 flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">verified</span>
+                    Sertifikalar
+                </h2>
+<div class="grid gap-4">
+<div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 shadow-sm flex justify-between items-center group hover:border-primary/40 transition-all">
+<div>
+<p class="text-xs font-bold text-primary uppercase">Amazon Web Services</p>
+<h4 class="font-bold">AWS Certified Solutions Architect</h4>
+</div>
+<a class="text-primary hover:scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined">open_in_new</span>
+</a>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 shadow-sm flex justify-between items-center group hover:border-primary/40 transition-all">
+<div>
+<p class="text-xs font-bold text-primary uppercase">Google Cloud</p>
+<h4 class="font-bold">Professional Cloud Developer</h4>
+</div>
+<a class="text-primary hover:scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined">open_in_new</span>
+</a>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 shadow-sm flex justify-between items-center group hover:border-primary/40 transition-all">
+<div>
+<p class="text-xs font-bold text-primary uppercase">Scrum.org</p>
+<h4 class="font-bold">Professional Scrum Master I</h4>
+</div>
+<a class="text-primary hover:scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Okuduğum Kitaplar Section (Bookshelf) -->
+<section class="py-24 px-8 bg-surface-container-low overflow-hidden" id="books">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-4xl headline-font font-bold mb-12">Zihinsel Kütüphanem</h2>
+<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Book 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl border border-outline-variant/20 relative group overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:scale-110"></div>
+<h4 class="text-xl font-bold headline-font mb-2">Clean Architecture</h4>
+<p class="text-sm text-on-surface-variant mb-6">Robert C. Martin</p>
+<div class="space-y-3">
+<p class="text-xs font-bold text-primary uppercase tracking-widest">Kazanılan Beceriler</p>
+<ul class="text-sm space-y-2 text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Dependency Rule</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Boundary Management</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Plugin Architecture</li>
+</ul>
+</div>
+</div>
+<!-- Book 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl border border-outline-variant/20 relative group overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:scale-110"></div>
+<h4 class="text-xl font-bold headline-font mb-2">Designing Data-Intensive Applications</h4>
+<p class="text-sm text-on-surface-variant mb-6">Martin Kleppmann</p>
+<div class="space-y-3">
+<p class="text-xs font-bold text-secondary uppercase tracking-widest">Kazanılan Beceriler</p>
+<ul class="text-sm space-y-2 text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary rounded-full"></span> Scalability Patterns</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary rounded-full"></span> Distributed Systems</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-secondary rounded-full"></span> Data Consistency</li>
+</ul>
+</div>
+</div>
+<!-- Book 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl border border-outline-variant/20 relative group overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-tertiary/5 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:scale-110"></div>
+<h4 class="text-xl font-bold headline-font mb-2">Refactoring</h4>
+<p class="text-sm text-on-surface-variant mb-6">Martin Fowler</p>
+<div class="space-y-3">
+<p class="text-xs font-bold text-tertiary uppercase tracking-widest">Kazanılan Beceriler</p>
+<ul class="text-sm space-y-2 text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-tertiary rounded-full"></span> Code Smells Identification</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-tertiary rounded-full"></span> Safe Transformations</li>
+<li class="flex items-center gap-2"><span class="w-1 h-1 bg-tertiary rounded-full"></span> Legacy Migration</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- İletişim Section -->
+<section class="py-24 px-8 max-w-7xl mx-auto" id="contact">
+<div class="bg-inverse-surface rounded-[3rem] p-12 md:p-20 text-inverse-on-surface overflow-hidden relative">
+<div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 blur-[100px] rounded-full"></div>
+<div class="grid md:grid-cols-2 gap-20 relative z-10">
+<div>
+<h2 class="text-5xl headline-font font-extrabold mb-8 leading-tight">Bir Sonraki Büyük Projeyi Birlikte Başlatalım.</h2>
+<p class="text-lg opacity-70 mb-12">Fikirlerinizi teknik bir vizyona dönüştürmek için hazırım. Kahve içip projenizi konuşalım.</p>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary-fixed">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<p class="text-xs opacity-50 uppercase font-bold">E-posta</p>
+<p class="text-xl font-bold">hello@caneryilmaz.dev</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary-fixed">
+<span class="material-symbols-outlined">distance</span>
+</div>
+<div>
+<p class="text-xs opacity-50 uppercase font-bold">Konum</p>
+<p class="text-xl font-bold">İstanbul, TR</p>
+</div>
+</div>
+</div>
+<div class="flex gap-6 mt-12">
+<a class="text-primary-fixed hover:scale-110 transition-transform" href="#"><img alt="LinkedIn" class="w-8 h-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1zrqT361obvrqeeP8OZ2pP6YwUNeqH5tHSIBxjfGcdGZXSCVxqZ_HLTjwD4FKsQL87bovpDTHza_1vV1FwaMR6P6iEA4hemCWuNL7gHGoWGbFd_V_UEGb-D61dvPN5fAFXRv-Bd7VJHmiEOab_QO_pfaonQyi8r7iM_frZwouDyna7EH8guDKQXoVGgkTpaIi9pdjihxxBKeUDm6cq0QJZ_J8oBOfp6oZ5mRkxkRceKw7Wo6GLeGBiWaL2bcD8qVOi8MbbIb7gAhz"/></a>
+<a class="text-primary-fixed hover:scale-110 transition-transform" href="#"><img alt="GitHub" class="w-8 h-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVTc_fO4p5GGrdX_oDjg4OJ89AoghFoz7ocSFiGz6GPnrJ8DWpsGWV5NtoeRB-7JK0dxcC8XqQrMqtsepyyDHL3dOck8nVdC5V2JzCyKAh1yCVbxnZVIFJY9jS_mdLRPpLAkpmFPF0ulB0nON7JE31vUFAAjBUyog1H8yDdKYD0x7tdkzK5ydDPCQDfTb9gOWbHwx05OArWHjVbF-TymnF1pfoLPZiP71tk3P3eRy39Y23U0lc63HTWCi4mPQRX6wTKGXFzkv2g2Rd"/></a>
+<a class="text-primary-fixed hover:scale-110 transition-transform" href="#"><img alt="Twitter" class="w-8 h-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHr_CYczuQDGgI7j2RtIKQuzsv8eGPr7crbrjk8mEfv2PRE1J-rm3hZ3shNzbYHV9qV9WssBXcLImvV438d6fCRPAvge3ptw4qedSX8HQ4GRoiKWFmWHTeetj8YA3QmUEk5by5s4eVqIDPwgAHx6PUNyM0C2CzA85TL-8mHvvZPXJeJfksbr3orsHQfh4mT2F3MSROEF1WJnzbJGq3ikN3F4FyTf2e0DLwBt_qecB3mTlydLvsLOXuIWN6vUqsOFFAwAW0Ml5S30aa"/></a>
+</div>
+</div>
+<form class="space-y-6">
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-bold opacity-70">Adınız</label>
+<input class="w-full bg-surface/5 border border-white/10 rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary outline-none transition-all" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold opacity-70">E-posta</label>
+<input class="w-full bg-surface/5 border border-white/10 rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary outline-none transition-all" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold opacity-70">Konu</label>
+<input class="w-full bg-surface/5 border border-white/10 rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary outline-none transition-all" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold opacity-70">Mesajınız</label>
+<textarea class="w-full bg-surface/5 border border-white/10 rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary outline-none transition-all" rows="4"></textarea>
+</div>
+<button class="w-full bg-primary py-5 rounded-2xl font-black text-on-primary headline-font uppercase tracking-widest hover:scale-[1.02] transition-transform active:scale-95 shadow-2xl shadow-primary/20">
+                            Mesaj Gönder
+                        </button>
+</form>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface py-12 border-t border-slate-200/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-8">
+<div class="text-lg font-bold text-teal-700">CURATOR</div>
+<p class="text-sm font-medium text-slate-500 Manrope text-center">© 2024 Liquid Curator Portfolio. Designed for prestige.</p>
+<div class="flex gap-8">
+<a class="text-slate-500 hover:text-teal-500 transition-opacity opacity-80 hover:opacity-100" href="#">Privacy</a>
+<a class="text-slate-500 hover:text-teal-500 transition-opacity opacity-80 hover:opacity-100" href="#">Terms</a>
+<a class="text-slate-500 hover:text-teal-500 transition-opacity opacity-80 hover:opacity-100" href="#">LinkedIn</a>
+<a class="text-slate-500 hover:text-teal-500 transition-opacity opacity-80 hover:opacity-100" href="#">GitHub</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,19 @@
+# Public repo: private hub notes stay local / website-logic only
+docs/private/
+
+# Dependencies & build
+node_modules/
+frontend/.next/
+backend/dist/
+
+# Secrets & local DB
+.env
+.env.*
+!.env.example
+backend/.env
+frontend/.env.local
+backend/prisma/dev.db
+backend/prisma/dev.db-journal
+
+# Cursor local
+.cursor/

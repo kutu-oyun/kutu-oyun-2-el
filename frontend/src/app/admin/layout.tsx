@@ -11,6 +11,8 @@ import {
   Tag,
   AlertTriangle,
   Settings,
+  ShoppingCart,
+  FileText,
 } from 'lucide-react';
 import { Card } from '@/components/ui';
 import { useAuth } from '@/hooks/useAuth';
@@ -19,8 +21,10 @@ const menuItems = [
   { href: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
   { href: '/admin/kullanicilar', icon: Users, label: 'Kullanıcılar' },
   { href: '/admin/urunler', icon: Package, label: 'Ürünler' },
+  { href: '/admin/siparisler', icon: ShoppingCart, label: 'Siparişler' },
   { href: '/admin/kategoriler', icon: Tag, label: 'Kategoriler' },
   { href: '/admin/raporlar', icon: AlertTriangle, label: 'Raporlar' },
+  { href: '/admin/audit-log', icon: FileText, label: 'İşlem Geçmişi' },
 ];
 
 export default function AdminLayout({

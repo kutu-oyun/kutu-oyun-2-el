@@ -2,12 +2,19 @@ import { getIdToken } from './firebase';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
 
+// localStorage'dan test session token'ı al
+const getTestSessionToken = (): string | null => {
+  if (typeof window === 'undefined') return null;
+  return localStorage.getItem('testSessionToken');
+};
+
 interface RequestOptions extends RequestInit {
   skipAuth?: boolean;
+  useTestSession?: boolean;
 }
 
 async function request<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
-  const { skipAuth = false, ...fetchOptions } = options;
+  const { skipAuth = false, useTestSession = true, ...fetchOptions } = options;
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
@@ -15,9 +22,17 @@ async function request<T>(endpoint: string, options: RequestOptions = {}): Promi
   };
 
   if (!skipAuth) {
-    const token = await getIdToken();
-    if (token) {
-      (headers as Record<string, string>)['Authorization'] = `Bearer ${token}`;
+    // Önce test session token'ı kontrol et
+    const testToken = useTestSession ? getTestSessionToken() : null;
+    
+    if (testToken) {
+      (headers as Record<string, string>)['Authorization'] = `Bearer ${testToken}`;
+    } else {
+      // Firebase token'ı dene
+      const token = await getIdToken();
+      if (token) {
+        (headers as Record<string, string>)['Authorization'] = `Bearer ${token}`;
+      }
     }
   }
 
@@ -125,6 +140,56 @@ export const api = {
   payment: {
     create: (data: any) => request('/payment/create', { method: 'POST', body: JSON.stringify(data) }),
     status: (orderId: string) => request(`/payment/status/${orderId}`),
+  },
+
+  // Bypass / Test hesapları
+  bypass: {
+    login: (username: string, password: string) =>
+      request('/bypass/login', { 
+        method: 'POST', 
+        body: JSON.stringify({ username, password }),
+        skipAuth: true 
+      }),
+    selectUser: (bypassToken: string, userId: string, selectedRole?: string) =>
+      request('/bypass/select-user', { 
+        method: 'POST', 
+        body: JSON.stringify({ bypassToken, userId, selectedRole }),
+        skipAuth: true 
+      }),
+    getUsers: (params?: { role?: string; search?: string; page?: number; limit?: number }) => {
+      const searchParams = new URLSearchParams();
+      if (params?.role) searchParams.set('role', params.role);
+      if (params?.search) searchParams.set('search', params.search);
+      if (params?.page) searchParams.set('page', String(params.page));
+      if (params?.limit) searchParams.set('limit', String(params.limit));
+      return request(`/bypass/users?${searchParams}`, { skipAuth: true });
+    },
+    quickLogin: (userId: string, selectedRole?: string) =>
+      request('/bypass/quick-login', { 
+        method: 'POST', 
+        body: JSON.stringify({ userId, selectedRole }),
+        skipAuth: true 
+      }),
+    verify: () => request('/bypass/verify'),
+    logout: () => request('/bypass/logout', { method: 'POST' }),
+  },
+
+  // Misafir işlemleri
+  guest: {
+    checkout: (data: {
+      email: string;
+      phone: string;
+      contactName: string;
+      city: string;
+      district: string;
+      neighborhood?: string;
+      address: string;
+      zipCode?: string;
+      items: { productId: string; quantity: number }[];
+      note?: string;
+    }) => request('/guest/checkout', { method: 'POST', body: JSON.stringify(data), skipAuth: true }),
+    trackOrder: (orderNumber: string) => request(`/guest/order/${orderNumber}`, { skipAuth: true }),
+    getOrdersByEmail: (email: string) => request(`/guest/orders?email=${encodeURIComponent(email)}`, { skipAuth: true }),
   },
 };
 

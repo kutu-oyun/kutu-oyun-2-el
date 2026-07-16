@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Production için optimize edilmiş build
+  output: 'standalone',
+  
+  // Vercel'de otomatik olarak ayarlanır, ama açıkça belirtmek iyi
+  reactStrictMode: true,
 };
 
 export default nextConfig;

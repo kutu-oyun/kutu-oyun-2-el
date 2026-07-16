@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CURATOR | Premium Portfolyo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#effcf8",
+                        "secondary": "#0051d5",
+                        "surface-container-highest": "#d8e5e1",
+                        "inverse-surface": "#273330",
+                        "on-surface": "#121e1c",
+                        "surface-bright": "#effcf8",
+                        "surface-container-low": "#e9f6f2",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#006e2f",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#0ea5a4",
+                        "secondary-fixed": "#dbe1ff",
+                        "inverse-primary": "#5ed9d7",
+                        "surface-container-high": "#deebe7",
+                        "tertiary-fixed": "#6bff8f",
+                        "surface-tint": "#006a69",
+                        "on-background": "#121e1c",
+                        "on-secondary-container": "#fefcff",
+                        "surface-variant": "#d8e5e1",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#effcf8",
+                        "on-primary-fixed-variant": "#00504f",
+                        "on-secondary-fixed": "#00174b",
+                        "outline-variant": "#bcc9c8",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "primary-fixed": "#7df5f4",
+                        "on-primary-container": "#003333",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#b4c5ff",
+                        "on-tertiary-fixed": "#002109",
+                        "primary": "#006a69",
+                        "inverse-on-surface": "#e7f4f0",
+                        "on-primary": "#ffffff",
+                        "outline": "#6d7a79",
+                        "on-surface-variant": "#3d4949",
+                        "on-secondary-fixed-variant": "#003ea8",
+                        "secondary-container": "#316bf3",
+                        "tertiary-container": "#00ab4d",
+                        "on-tertiary-container": "#003513",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#5ed9d7",
+                        "surface-dim": "#d0ddd9",
+                        "on-primary-fixed": "#002020",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "surface-container": "#e4f1ed"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .liquid-gradient {
+            background: linear-gradient(135deg, #22C55E, #14B8A6, #3B82F6);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl shadow-sm">
+<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<span class="text-xl font-black tracking-tighter text-teal-700">CURATOR</span>
+<!-- Mobile Menu Trigger -->
+<button class="p-2 text-teal-600 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="px-6 py-12 flex flex-col gap-8">
+<div class="relative">
+<h1 class="font-headline text-5xl font-extrabold tracking-tight leading-[1.1] text-on-surface z-10 relative">
+                    Dijital Deneyimleri <br/>
+<span class="text-transparent bg-clip-text liquid-gradient">Küre Ediyorum.</span>
+</h1>
+<div class="absolute -top-4 -left-4 w-24 h-24 bg-primary-fixed/20 blur-3xl rounded-full -z-10"></div>
+</div>
+<p class="text-lg text-on-surface-variant leading-relaxed max-w-md">
+                Modern estetik ve yüksek performanslı kodun buluştuğu noktada, markanız için prestijli dijital varlıklar inşa ediyorum.
+            </p>
+<div class="flex gap-4">
+<button class="liquid-gradient text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform duration-300">
+                    Projelerim
+                </button>
+<button class="bg-surface-container-high text-primary px-6 py-4 rounded-xl font-bold hover:scale-105 transition-transform duration-300">
+                    İletişim
+                </button>
+</div>
+<!-- Hero Image / Visual Anchor -->
+<div class="mt-8 rounded-3xl overflow-hidden aspect-[4/5] bg-surface-container-low shadow-2xl relative">
+<img class="w-full h-full object-cover grayscale-[20%] contrast-[1.1]" data-alt="Modern minimalist workspace with a laptop and plants, soft natural lighting from a window, high-end professional aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjKE_1u8fYFC5lj2mJH2THvB6VEAFo7dMVeq5aOyHUXLpMjBkA_il-9oHMyj7UlQqpwnk1feP9qFdxALRzjAZGMiieQxeAMVYADgX_FfTaWBtfqaH0bA8J-56RyqC0OCyqyqOK-I1RzpsTR6aWUxPBb1lUsmT3OLpwDhEh4_iJIK2ayQJs0SAJKD_WA4k96AWOTVQDgpKQ1cajDPy7qaLACKf4BPDqZikVz8hS99Hgsl4yYHowZQYJ9zH5eRKcWdbN00fWlL0lxaAf"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent"></div>
+</div>
+</section>
+<!-- Skill Chips -->
+<section class="px-6 py-12 bg-surface-container-low">
+<h2 class="font-headline text-2xl font-semibold mb-8 flex items-center gap-2">
+<span class="w-8 h-[2px] bg-primary"></span>
+                Yetenek Seti
+            </h2>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-sm font-bold">UI Design</span>
+<span class="px-4 py-2 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-sm font-bold">React.js</span>
+<span class="px-4 py-2 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-sm font-bold">Tailwind CSS</span>
+<span class="px-4 py-2 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-sm font-bold">Figma</span>
+<span class="px-4 py-2 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-sm font-bold">Node.js</span>
+<span class="px-4 py-2 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-sm font-bold">Creative Direction</span>
+<span class="px-4 py-2 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-sm font-bold">Motion Design</span>
+</div>
+</section>
+<!-- Project Carousel (Swipeable on Mobile) -->
+<section class="py-16 overflow-hidden">
+<div class="px-6 mb-8 flex justify-between items-end">
+<h2 class="font-headline text-3xl font-bold leading-tight">
+                    Seçilmiş <br/> Çalışmalar
+                </h2>
+<span class="text-sm font-bold text-primary flex items-center gap-1 mb-1">
+                    Kaydırın <span class="material-symbols-outlined text-sm">east</span>
+</span>
+</div>
+<div class="flex overflow-x-auto gap-6 px-6 hide-scrollbar snap-x snap-mandatory">
+<!-- Project Card 1 -->
+<div class="min-w-[85%] snap-center group">
+<div class="aspect-[3/4] rounded-3xl overflow-hidden bg-surface-container-high mb-4 shadow-xl">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Close-up of a high-tech minimalist smartphone interface with abstract turquoise glassmorphism shapes and fluid typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDQkhCHYkO8wnL-Gpt-qTiuQWnYPfkc8_dJJB8lWd0dgTUe2wrBS6kxJzmYZIrr5ScRAWsDOZtjuLmFgAHMeEInkttQghozv7azfIS0Dz3jfP2kV31PzlphoPaCXwJExhkWhR5ZFBDTUjx7N51vgOxDAp07j-yaNKldSnhL6F5gg9rE48GgHiej6iTCB1yJdXco3qO_X8QUf4Ir1JiPusuMCLJwWFh16-BK_lQbgGFurggxsAo2-E0GFhVd2YQIrwmcS0GFy3gSw3-"/>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface">Lumina App</h3>
+<p class="text-on-surface-variant text-sm mt-1">SaaS Interface &amp; Brand Identity</p>
+</div>
+<!-- Project Card 2 -->
+<div class="min-w-[85%] snap-center group">
+<div class="aspect-[3/4] rounded-3xl overflow-hidden bg-surface-container-high mb-4 shadow-xl">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Sophisticated web dashboard layout for financial analytics with clean lines, dark modes, and neon turquoise accent highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvWQn68DyisPLzWtcu2Qr7_kMQVH7rWJcmMJ7mNSj0MyKV54TSGUptbSQ3Z4LJrJmsgnYEv2YjSIcvs6PgAHUubVi20C1dBq2Sb2SK9RtD1my7q7x4RKCmcLYH51BwIyWNw8fjIM4PcvOjMXaUdATGoAw1UP4YSTbhpD_pYEnFObC4c9daq9aEhiQxp30zys-vVSWO8er7R4mclDcRmVqPXNwlyqyAeE5xkL4qSWilHpAfNfDHctOPKAGjWaFFtudlU1vamhWeTZQp"/>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface">Nexus Dashboard</h3>
+<p class="text-on-surface-variant text-sm mt-1">Complex Data Visualization</p>
+</div>
+<!-- Project Card 3 -->
+<div class="min-w-[85%] snap-center group">
+<div class="aspect-[3/4] rounded-3xl overflow-hidden bg-surface-container-high mb-4 shadow-xl">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Abstract 3D shapes floating in a soft mint green atmosphere with soft shadows and elegant curves, premium art style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsWRj2gE7qdZemINqn8it5-tg0O2818GkWvwZN856HOKa0czMjxfS7bJGbZTMjObeD4BDr1oughv4T9rYilhuMw8Mnludds1AeECC-6Nd7t9so8OSZVY270V2tJWmjYGBoGpkDKxCqOF6RgwPWiyF0_1IipOiaqYN7AaKlhCETkgd0PW7M5mJXBF6rAtDKAKEiL3RoL1Ogd3eCv-UhHY1MK5hTREXjmRbepyuv46TOkQsLj9aOYbl0ruZrpEFkE52AFT8xrUSqFCfi"/>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface">Aura Studio</h3>
+<p class="text-on-surface-variant text-sm mt-1">Creative Agency Portfolio</p>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="px-6 py-16 bg-surface-container-lowest">
+<div class="bg-surface-container-high rounded-[2rem] p-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+<h2 class="font-headline text-2xl font-extrabold mb-2">Hadi Konuşalım.</h2>
+<p class="text-on-surface-variant mb-8">Yeni bir proje fikriniz mi var? Birlikte prestijli bir iş çıkaralım.</p>
+<form class="space-y-4">
+<div class="space-y-1">
+<label class="text-xs font-bold uppercase tracking-wider text-primary ml-1">İsim</label>
+<input class="w-full px-5 py-4 rounded-2xl bg-surface border-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="Adınız Soyadınız" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold uppercase tracking-wider text-primary ml-1">E-Posta</label>
+<input class="w-full px-5 py-4 rounded-2xl bg-surface border-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="merhaba@ornek.com" type="email"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold uppercase tracking-wider text-primary ml-1">Mesaj</label>
+<textarea class="w-full px-5 py-4 rounded-2xl bg-surface border-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="Projenizden bahsedin..." rows="4"></textarea>
+</div>
+<button class="w-full liquid-gradient text-white py-5 rounded-2xl font-bold text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+                        Mesajı Gönder
+                    </button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface py-12 border-t border-slate-200/10">
+<div class="flex flex-col items-center px-8 max-w-7xl mx-auto gap-8 text-center">
+<span class="text-lg font-bold text-teal-700">CURATOR</span>
+<div class="flex gap-6">
+<a class="text-slate-500 hover:text-teal-500 font-medium transition-colors" href="#">LinkedIn</a>
+<a class="text-slate-500 hover:text-teal-500 font-medium transition-colors" href="#">GitHub</a>
+<a class="text-slate-500 hover:text-teal-500 font-medium transition-colors" href="#">Behance</a>
+</div>
+<p class="text-sm font-medium text-slate-400">© 2024 Liquid Curator Portfolio. Designed for prestige.</p>
+<div class="flex gap-4 text-xs text-slate-400">
+<a class="hover:text-teal-600" href="#">Gizlilik</a>
+<a class="hover:text-teal-600" href="#">Şartlar</a>
+</div>
+</div>
+</footer>
+<!-- Bottom Mobile Nav (Optional enhancement for Mobile context) -->
+<div class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] bg-surface/80 backdrop-blur-lg rounded-full shadow-2xl z-50 flex justify-around items-center px-6 py-4">
+<a class="text-teal-700 font-bold flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+</a>
+<a class="text-slate-600 flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+</a>
+<a class="text-slate-600 flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined">person</span>
+</a>
+<a class="text-slate-600 flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined">mail</span>
+</a>
+</div>
+</body></html>

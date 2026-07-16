@@ -1,17 +1,51 @@
 import { Request, Response } from 'express';
+import crypto from 'crypto';
 import { AuthRequest } from '../middlewares/auth.middleware.js';
 import prisma from '../config/prisma.js';
-import Iyzipay from 'iyzipay';
 
-const iyzipay = new Iyzipay({
-  apiKey: process.env.IYZICO_API_KEY || '',
-  secretKey: process.env.IYZICO_SECRET_KEY || '',
-  uri: process.env.IYZICO_BASE_URL || 'https://sandbox-api.iyzipay.com',
-});
+// PayTR Configuration
+const PAYTR_MERCHANT_ID = process.env.PAYTR_MERCHANT_ID || '';
+const PAYTR_MERCHANT_KEY = process.env.PAYTR_MERCHANT_KEY || '';
+const PAYTR_MERCHANT_SALT = process.env.PAYTR_MERCHANT_SALT || '';
+const PAYTR_API_URL = 'https://www.paytr.com/odeme/api/get-token';
+
+const hasPaytrConfig = PAYTR_MERCHANT_ID && PAYTR_MERCHANT_KEY && PAYTR_MERCHANT_SALT;
+
+// Generate PayTR token hash
+function generatePaytrHash(params: Record<string, string>): string {
+  const hashStr = `${params.merchant_id}${params.user_ip}${params.merchant_oid}${params.email}${params.payment_amount}${params.user_basket}${params.no_installment}${params.max_installment}${params.currency}${params.test_mode}${PAYTR_MERCHANT_SALT}`;
+  return crypto.createHmac('sha256', PAYTR_MERCHANT_KEY).update(hashStr).digest('base64');
+}
 
 export const createPayment = async (req: AuthRequest, res: Response): Promise<void> => {
+  if (!hasPaytrConfig) {
+    // Development mode - simulate payment
+    console.warn('⚠️ PayTR not configured - simulating payment');
+    const { orderId } = req.body;
+    
+    try {
+      await prisma.order.update({
+        where: { id: orderId },
+        data: {
+          status: 'PAID',
+          paymentId: `DEV-${Date.now()}`,
+          paymentStatus: 'SUCCESS',
+        },
+      });
+      
+      res.json({
+        success: true,
+        message: 'Payment simulated (dev mode)',
+        paymentId: `DEV-${Date.now()}`,
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Payment simulation failed' });
+    }
+    return;
+  }
+
   try {
-    const { orderId, card, buyer, shippingAddress, billingAddress } = req.body;
+    const { orderId, buyer } = req.body;
 
     // Get order
     const order = await prisma.order.findUnique({
@@ -44,92 +78,60 @@ export const createPayment = async (req: AuthRequest, res: Response): Promise<vo
       return;
     }
 
-    // Prepare basket items
-    const basketItems = order.items.map((item, index) => ({
-      id: item.id,
-      name: item.product.title.substring(0, 50),
-      category1: item.product.category.name,
-      itemType: Iyzipay.BASKET_ITEM_TYPE.PHYSICAL,
-      price: Number(item.price).toFixed(2),
-    }));
+    // Prepare basket items for PayTR
+    const basketItems = order.items.map((item) => [
+      item.product.title.substring(0, 50),
+      (Number(item.price) * 100).toFixed(0), // PayTR uses kuruş
+      item.quantity,
+    ]);
 
-    // Create payment request
-    const paymentRequest = {
-      locale: Iyzipay.LOCALE.TR,
-      conversationId: order.orderNumber,
-      price: Number(order.totalAmount).toFixed(2),
-      paidPrice: Number(order.totalAmount).toFixed(2),
-      currency: Iyzipay.CURRENCY.TRY,
-      installment: '1',
-      basketId: order.id,
-      paymentChannel: Iyzipay.PAYMENT_CHANNEL.WEB,
-      paymentGroup: Iyzipay.PAYMENT_GROUP.PRODUCT,
-      paymentCard: {
-        cardHolderName: card.holderName,
-        cardNumber: card.number.replace(/\s/g, ''),
-        expireMonth: card.expireMonth,
-        expireYear: card.expireYear,
-        cvc: card.cvc,
-        registerCard: '0',
-      },
-      buyer: {
-        id: req.user!.uid,
-        name: buyer.name,
-        surname: buyer.surname,
-        gsmNumber: buyer.phone,
-        email: buyer.email,
-        identityNumber: buyer.identityNumber || '11111111111',
-        registrationAddress: shippingAddress.address,
-        ip: req.ip || '127.0.0.1',
-        city: shippingAddress.city,
-        country: 'Turkey',
-      },
-      shippingAddress: {
-        contactName: shippingAddress.contactName,
-        city: shippingAddress.city,
-        country: 'Turkey',
-        address: shippingAddress.address,
-      },
-      billingAddress: {
-        contactName: billingAddress?.contactName || shippingAddress.contactName,
-        city: billingAddress?.city || shippingAddress.city,
-        country: 'Turkey',
-        address: billingAddress?.address || shippingAddress.address,
-      },
-      basketItems,
+    const userBasket = Buffer.from(JSON.stringify(basketItems)).toString('base64');
+    const paymentAmount = (Number(order.totalAmount) * 100).toFixed(0);
+
+    const params: Record<string, string> = {
+      merchant_id: PAYTR_MERCHANT_ID,
+      user_ip: req.ip || '127.0.0.1',
+      merchant_oid: order.orderNumber,
+      email: buyer.email || order.buyer.email,
+      payment_amount: paymentAmount,
+      user_basket: userBasket,
+      no_installment: '0',
+      max_installment: '12',
+      currency: 'TL',
+      test_mode: process.env.NODE_ENV === 'production' ? '0' : '1',
+      user_name: buyer.name || order.buyer.displayName || 'Müşteri',
+      user_address: order.address.address,
+      user_phone: buyer.phone || order.address.phone,
+      merchant_ok_url: `${process.env.FRONTEND_URL}/siparis/${orderId}?status=success`,
+      merchant_fail_url: `${process.env.FRONTEND_URL}/siparis/${orderId}?status=fail`,
+      timeout_limit: '30',
+      debug_on: process.env.NODE_ENV === 'production' ? '0' : '1',
+      lang: 'tr',
     };
 
-    iyzipay.payment.create(paymentRequest, async (err: any, result: any) => {
-      if (err) {
-        console.error('iyzico error:', err);
-        res.status(500).json({ error: 'Payment failed' });
-        return;
-      }
+    params.paytr_token = generatePaytrHash(params);
 
-      if (result.status === 'success') {
-        // Update order
-        await prisma.order.update({
-          where: { id: orderId },
-          data: {
-            status: 'PAID',
-            paymentId: result.paymentId,
-            paymentStatus: result.status,
-          },
-        });
-
-        res.json({
-          success: true,
-          paymentId: result.paymentId,
-          message: 'Payment successful',
-        });
-      } else {
-        res.status(400).json({
-          success: false,
-          error: result.errorMessage || 'Payment failed',
-          errorCode: result.errorCode,
-        });
-      }
+    // Request token from PayTR
+    const response = await fetch(PAYTR_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(params),
     });
+
+    const result = await response.json();
+
+    if (result.status === 'success') {
+      res.json({
+        success: true,
+        token: result.token,
+        iframeUrl: `https://www.paytr.com/odeme/guvenli/${result.token}`,
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        error: result.reason || 'Payment initialization failed',
+      });
+    }
   } catch (error) {
     console.error('Create payment error:', error);
     res.status(500).json({ error: 'Failed to create payment' });
@@ -138,47 +140,72 @@ export const createPayment = async (req: AuthRequest, res: Response): Promise<vo
 
 export const paymentCallback = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { token } = req.body;
+    const {
+      merchant_oid,
+      status,
+      total_amount,
+      hash,
+      failed_reason_code,
+      failed_reason_msg,
+      test_mode,
+      payment_type,
+    } = req.body;
 
-    // Verify payment with iyzico
-    const retrieveRequest = {
-      locale: Iyzipay.LOCALE.TR,
-      conversationId: token,
-      token,
-    };
+    // Verify hash
+    const hashStr = `${merchant_oid}${PAYTR_MERCHANT_SALT}${status}${total_amount}`;
+    const expectedHash = crypto.createHmac('sha256', PAYTR_MERCHANT_KEY).update(hashStr).digest('base64');
 
-    iyzipay.checkoutForm.retrieve(retrieveRequest, async (err: any, result: any) => {
-      if (err) {
-        console.error('iyzico callback error:', err);
-        res.status(500).json({ error: 'Callback failed' });
-        return;
-      }
+    if (hash !== expectedHash) {
+      res.status(400).send('PAYTR notification error: Invalid hash');
+      return;
+    }
 
-      if (result.status === 'success' && result.paymentStatus === 'SUCCESS') {
-        // Find and update order
-        const order = await prisma.order.findFirst({
-          where: { orderNumber: result.basketId },
-        });
-
-        if (order) {
-          await prisma.order.update({
-            where: { id: order.id },
-            data: {
-              status: 'PAID',
-              paymentId: result.paymentId,
-              paymentStatus: result.paymentStatus,
-            },
-          });
-        }
-
-        res.json({ success: true });
-      } else {
-        res.status(400).json({ success: false, error: result.errorMessage });
-      }
+    // Find order by orderNumber
+    const order = await prisma.order.findFirst({
+      where: { orderNumber: merchant_oid },
     });
+
+    if (!order) {
+      res.status(404).send('PAYTR notification error: Order not found');
+      return;
+    }
+
+    if (status === 'success') {
+      await prisma.order.update({
+        where: { id: order.id },
+        data: {
+          status: 'PAID',
+          paymentId: merchant_oid,
+          paymentStatus: 'SUCCESS',
+        },
+      });
+
+      // Update product status to SOLD
+      const orderItems = await prisma.orderItem.findMany({
+        where: { orderId: order.id },
+        select: { productId: true },
+      });
+
+      await prisma.product.updateMany({
+        where: {
+          id: { in: orderItems.map((item) => item.productId) },
+        },
+        data: { status: 'SOLD' },
+      });
+    } else {
+      await prisma.order.update({
+        where: { id: order.id },
+        data: {
+          paymentStatus: 'FAILED',
+        },
+      });
+    }
+
+    // PayTR expects "OK" response
+    res.send('OK');
   } catch (error) {
     console.error('Payment callback error:', error);
-    res.status(500).json({ error: 'Callback processing failed' });
+    res.status(500).send('PAYTR notification error');
   }
 };
 

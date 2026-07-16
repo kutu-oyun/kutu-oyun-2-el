@@ -1,0 +1,47 @@
+---
+description: Docs Bismillah pull / Elhamdulillah push — tum projelerde gecerli
+alwaysApply: true
+---
+
+# Website docs workflow
+
+Bu kural `docs/cursor-rules/` icinde canonical olarak durur. `docs-pull` calistiginda `.cursor/rules/` altina otomatik kopyalanir.
+
+## Oturum baslangici
+
+Kullanici **`bismillah docsa bak, guncel basla`** veya **`clone edip incele`** dediginde:
+
+1. Pull calistir (asagidaki A veya B)
+2. Cursor kurali + scriptler kurulduysa devam
+3. Oku: `docs/00-READ-FIRST.md` → `projects-registry.md` → aktif proje klasoru
+
+**A) `scripts/docs-pull.ps1` varsa** → calistir.
+
+**B) Yoksa** → global pull (ilk seferde otomatik clone + kurulum):
+
+```powershell
+& "$env:USERPROFILE\.website-logic-cache\scripts\docs-pull-global.ps1"
+```
+
+Global pull su anki projeye kopyalar: `docs/`, `scripts/docs-*.ps1`, `.cursor/rules/docs-workflow.mdc`
+
+## Oturum bitisi
+
+Kullanici **`elhamdulillah`** dediginde:
+
+- `scripts/docs-push.ps1 -Message "ozet"` calistir
+- Yoksa hub cache'te guncelle + git push
+
+## Proje izolasyonu
+
+| Repo | Docs yolu |
+|------|-----------|
+| Edura | `docs/public/edura/` |
+| Kutuly | `docs/public/kutuly/` |
+| hasanvuralcom | `docs/private/hasanvuralcom/` |
+| bhmcontrol | `docs/private/bhmcontrol/` |
+| godiva-elix | `docs/private/godiva-elix/` |
+
+## Private
+
+Public repo'larda (`Edura`, `Kutuly`) `docs/private/` gitignore.

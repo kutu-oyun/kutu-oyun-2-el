@@ -11,6 +11,13 @@ datasource db {
 enum Role {
   USER
   ADMIN
+  SELLER
+}
+
+enum AuthProvider {
+  FIREBASE
+  LOCAL
+  BYPASS
 }
 
 enum Condition {
@@ -45,14 +52,17 @@ enum OrderStatus {
 
 // Models
 model User {
-  id          String   @id // Firebase UID
-  email       String   @unique
-  displayName String?
-  photoURL    String?
-  phone       String?
-  role        Role     @default(USER)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String       @id @default(cuid())
+  email        String       @unique
+  displayName  String?
+  photoURL     String?
+  phone        String?
+  passwordHash String?      // Yerel auth için bcrypt hash
+  authProvider AuthProvider @default(LOCAL)
+  role         Role         @default(USER)
+  isActive     Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 
   products            Product[]
   orders              Order[]
@@ -63,8 +73,36 @@ model User {
   sentMessages        Message[]      @relation("MessageSender")
   buyerConversations  Conversation[] @relation("ConversationBuyer")
   sellerConversations Conversation[] @relation("ConversationSeller")
+  testSessions        TestSession[]
 
+  @@index([email])
+  @@index([role])
   @@map("users")
+}
+
+model AdminBypass {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String   // bcrypt hash
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@map("admin_bypass")
+}
+
+model TestSession {
+  id           String   @id @default(cuid())
+  token        String   @unique @db.VarChar(500)
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  selectedRole Role
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  @@index([userId])
+  @@index([token])
+  @@index([expiresAt])
+  @@map("test_sessions")
 }
 
 model Category {
@@ -90,6 +128,7 @@ model Product {
   playTime    Int?
   status      ProductStatus @default(ACTIVE)
   location    String?
+  viewCount   Int           @default(0)
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
 
@@ -98,17 +137,20 @@ model Product {
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id])
 
-  images        ProductImage[]
-  cartItems     CartItem[]
-  orderItems    OrderItem[]
-  reviews       Review[]
-  favorites     Favorite[]
-  conversations Conversation[]
+  images           ProductImage[]
+  cartItems        CartItem[]
+  orderItems       OrderItem[]
+  reviews          Review[]
+  favorites        Favorite[]
+  conversations    Conversation[]
+  guestOrderItems  GuestOrderItem[]
 
   @@index([sellerId])
   @@index([categoryId])
   @@index([status])
   @@index([createdAt])
+  @@index([price])
+  @@fulltext([title, description])
   @@map("products")
 }
 
@@ -136,7 +178,7 @@ model Address {
   isDefault    Boolean @default(false)
 
   userId String
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   orders Order[]
 
@@ -150,9 +192,9 @@ model CartItem {
   createdAt DateTime @default(now())
 
   userId    String
-  user      User    @relation(fields: [userId], references: [id])
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   productId String
-  product   Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@unique([userId, productId])
   @@index([userId])
@@ -166,6 +208,7 @@ model Order {
   totalAmount   Decimal     @db.Decimal(10, 2)
   paymentId     String?
   paymentStatus String?
+  note          String?     @db.Text
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 
@@ -179,6 +222,7 @@ model Order {
   @@index([buyerId])
   @@index([status])
   @@index([createdAt])
+  @@index([orderNumber])
   @@map("orders")
 }
 
@@ -196,14 +240,56 @@ model OrderItem {
   @@map("order_items")
 }
 
+// Misafir siparişleri için
+model GuestOrder {
+  id            String      @id @default(cuid())
+  orderNumber   String      @unique
+  email         String
+  phone         String
+  contactName   String
+  city          String
+  district      String
+  neighborhood  String?
+  address       String      @db.Text
+  zipCode       String?
+  status        OrderStatus @default(PENDING)
+  totalAmount   Decimal     @db.Decimal(10, 2)
+  paymentId     String?
+  paymentStatus String?
+  note          String?     @db.Text
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  items GuestOrderItem[]
+
+  @@index([email])
+  @@index([orderNumber])
+  @@index([status])
+  @@map("guest_orders")
+}
+
+model GuestOrderItem {
+  id       String  @id @default(cuid())
+  quantity Int
+  price    Decimal @db.Decimal(10, 2)
+
+  guestOrderId String
+  guestOrder   GuestOrder @relation(fields: [guestOrderId], references: [id], onDelete: Cascade)
+  productId    String
+  product      Product    @relation(fields: [productId], references: [id])
+
+  @@index([guestOrderId])
+  @@map("guest_order_items")
+}
+
 model Favorite {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
 
   userId    String
-  user      User    @relation(fields: [userId], references: [id])
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   productId String
-  product   Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@unique([userId, productId])
   @@index([userId])
@@ -220,7 +306,7 @@ model Review {
   userId    String
   user      User    @relation(fields: [userId], references: [id])
   productId String
-  product   Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([productId])
@@ -237,7 +323,7 @@ model Conversation {
   sellerId  String
   seller    User    @relation("ConversationSeller", fields: [sellerId], references: [id])
   productId String
-  product   Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   messages Message[]
 
@@ -261,4 +347,21 @@ model Message {
   @@index([conversationId])
   @@index([senderId])
   @@map("messages")
+}
+
+// Audit log for admin actions
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String
+  action     String
+  entityType String
+  entityId   String?
+  details    String?  @db.Text
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("audit_logs")
 }

@@ -1,15 +1,16 @@
 import { Router } from 'express';
-import {
-  createPayment,
-  paymentCallback,
-  getPaymentStatus,
-} from '../controllers/payment.controller.js';
+import { createPayment, paymentCallback, getPaymentStatus } from '../controllers/payment.controller.js';
 import { verifyToken } from '../middlewares/auth.middleware.js';
 
 const router = Router();
 
+// PayTR ödeme başlatma
 router.post('/create', verifyToken, createPayment);
-router.post('/callback', paymentCallback); // iyzico webhook - no auth
+
+// PayTR callback (public - PayTR'dan gelir)
+router.post('/callback', paymentCallback);
+
+// Ödeme durumu sorgula
 router.get('/status/:orderId', verifyToken, getPaymentStatus);
 
 export default router;

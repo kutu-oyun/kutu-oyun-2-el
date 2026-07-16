@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#effcf8",
+              "secondary": "#0051d5",
+              "surface-container-highest": "#d8e5e1",
+              "inverse-surface": "#273330",
+              "on-surface": "#121e1c",
+              "surface-bright": "#effcf8",
+              "surface-container-low": "#e9f6f2",
+              "on-error-container": "#93000a",
+              "tertiary": "#006e2f",
+              "on-tertiary": "#ffffff",
+              "primary-container": "#0ea5a4",
+              "secondary-fixed": "#dbe1ff",
+              "inverse-primary": "#5ed9d7",
+              "surface-container-high": "#deebe7",
+              "tertiary-fixed": "#6bff8f",
+              "surface-tint": "#006a69",
+              "on-background": "#121e1c",
+              "on-secondary-container": "#fefcff",
+              "surface-variant": "#d8e5e1",
+              "error-container": "#ffdad6",
+              "error": "#ba1a1a",
+              "surface-container-lowest": "#ffffff",
+              "surface": "#effcf8",
+              "on-primary-fixed-variant": "#00504f",
+              "on-secondary-fixed": "#00174b",
+              "outline-variant": "#bcc9c8",
+              "on-tertiary-fixed-variant": "#005321",
+              "primary-fixed": "#7df5f4",
+              "on-primary-container": "#003333",
+              "on-error": "#ffffff",
+              "secondary-fixed-dim": "#b4c5ff",
+              "on-tertiary-fixed": "#002109",
+              "primary": "#006a69",
+              "inverse-on-surface": "#e7f4f0",
+              "on-primary": "#ffffff",
+              "outline": "#6d7a79",
+              "on-surface-variant": "#3d4949",
+              "on-secondary-fixed-variant": "#003ea8",
+              "secondary-container": "#316bf3",
+              "tertiary-container": "#00ab4d",
+              "on-tertiary-container": "#003513",
+              "on-secondary": "#ffffff",
+              "primary-fixed-dim": "#5ed9d7",
+              "surface-dim": "#d0ddd9",
+              "on-primary-fixed": "#002020",
+              "tertiary-fixed-dim": "#4ae176",
+              "surface-container": "#e4f1ed"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #effcf8; color: #121e1c; }
+        .headline-font { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { backdrop-filter: blur(20px); background: rgba(239, 252, 248, 0.6); }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #bcc9c8; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl shadow-sm">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-black tracking-tighter text-teal-700 headline-font uppercase">CURATOR</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-slate-500 hover:text-teal-500 font-medium transition-colors" href="#">About</a>
+<a class="text-teal-700 font-bold border-b-2 border-teal-500 pb-1" href="#">Projects</a>
+<a class="text-slate-500 hover:text-teal-500 font-medium transition-colors" href="#">Education</a>
+<a class="text-slate-500 hover:text-teal-500 font-medium transition-colors" href="#">Books</a>
+<a class="text-slate-500 hover:text-teal-500 font-medium transition-colors" href="#">Contact</a>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-bold hover:scale-105 transition-transform duration-300 shadow-lg shadow-primary/20">Hire Me</button>
+</div>
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8 py-20 relative overflow-hidden">
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl"></div>
+<div class="relative z-10">
+<span class="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Dijital Deneyim Tasarımcısı</span>
+<h1 class="display-lg headline-font text-5xl md:text-7xl font-bold text-on-surface tracking-tight leading-[1.1] mb-8 max-w-4xl">
+                    Fikirleri <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-tertiary">Akışkan Sanata</span> Dönüştürüyorum.
+                </h1>
+<p class="body-lg text-on-surface-variant max-w-2xl text-lg leading-relaxed mb-10">
+                    Küratörlük disipliniyle harmanlanmış, kullanıcı odaklı ve yüksek performanslı dijital ürünler. 
+                    Güzellik sadece yüzeyde değil, akışın kendisindedir.
+                </p>
+</div>
+</section>
+<!-- Projects Section (Timeline + Detail Panel) -->
+<section class="max-w-7xl mx-auto px-8 py-24" id="projects">
+<div class="flex flex-col md:flex-row gap-12 items-start h-auto md:h-[700px]">
+<!-- Left Column: Timeline -->
+<div class="w-full md:w-1/3 h-full overflow-y-auto custom-scrollbar pr-4">
+<div class="sticky top-0 bg-background pb-8 z-10">
+<h2 class="headline-md headline-font text-3xl font-bold mb-2">Seçkin Projeler</h2>
+<div class="h-1 w-20 bg-primary rounded-full"></div>
+</div>
+<div class="relative border-l-2 border-surface-container-high ml-4 space-y-12 py-4">
+<!-- Project Item 1 -->
+<div class="relative pl-8 group cursor-pointer">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary border-4 border-background group-hover:scale-125 transition-transform duration-300"></div>
+<span class="text-sm font-bold text-primary mb-1 block">2024</span>
+<h3 class="title-md headline-font text-xl font-bold group-hover:text-primary transition-colors">Neo-Finans Dashboard</h3>
+<p class="text-sm text-on-surface-variant line-clamp-2 mt-1">Gelecek nesil yatırımcılar için basitleştirilmiş veri görselleştirme sistemi.</p>
+</div>
+<!-- Project Item 2 -->
+<div class="relative pl-8 group cursor-pointer">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-container-highest border-4 border-background group-hover:bg-primary transition-colors"></div>
+<span class="text-sm font-medium text-on-surface-variant mb-1 block">2023</span>
+<h3 class="title-md headline-font text-xl font-bold group-hover:text-primary transition-colors">Eco-Flow E-Ticaret</h3>
+<p class="text-sm text-on-surface-variant line-clamp-2 mt-1">Sürdürülebilir moda markaları için özel tasarım alışveriş deneyimi.</p>
+</div>
+<!-- Project Item 3 -->
+<div class="relative pl-8 group cursor-pointer">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-container-highest border-4 border-background group-hover:bg-primary transition-colors"></div>
+<span class="text-sm font-medium text-on-surface-variant mb-1 block">2023</span>
+<h3 class="title-md headline-font text-xl font-bold group-hover:text-primary transition-colors">Luxe Hotel Web App</h3>
+<p class="text-sm text-on-surface-variant line-clamp-2 mt-1">Butik oteller için entegre rezervasyon ve concierge platformu.</p>
+</div>
+<!-- Project Item 4 -->
+<div class="relative pl-8 group cursor-pointer">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-container-highest border-4 border-background group-hover:bg-primary transition-colors"></div>
+<span class="text-sm font-medium text-on-surface-variant mb-1 block">2022</span>
+<h3 class="title-md headline-font text-xl font-bold group-hover:text-primary transition-colors">Artisanal Marketplace</h3>
+<p class="text-sm text-on-surface-variant line-clamp-2 mt-1">Yerel zanaatkarların küresel pazara açıldığı topluluk odaklı platform.</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Detail Panel -->
+<div class="w-full md:w-2/3 h-full bg-surface-container-low rounded-3xl overflow-hidden relative group">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<img alt="Project Visual" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Modern financial dashboard interface on a sleek laptop screen with neon teal accents and glassmorphism charts in a bright office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA64tTJjGIe7yocpuxe-cW3FcZuSAObB2ecZdAQYXZ_anTlviXJgQJ9Cw8DqahD4gdjF_sKOCtqOLH4VEcK1bUKCzB8-i0QgKTrhqNxMIT8lDVj_2DYFkoT_EPDCs0d1QlStVRtGJTnRgj57w0wxac9LawrGUIwQRWRTFRgt-1p9ZXDZSIzcI0shR8pMXt49SgMZrdJJyAz6nY_eHKXR3wQDMUsTTTFFCNotD7RYHiXiYPOJxRS_Sfv4bwyvw5Qq894gfok-S4YIhRm"/>
+<div class="absolute bottom-0 left-0 w-full p-8 md:p-12 z-20 text-white">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-primary/20 backdrop-blur-md rounded-full text-xs font-bold border border-white/20">FinTech</span>
+<span class="px-3 py-1 bg-primary/20 backdrop-blur-md rounded-full text-xs font-bold border border-white/20">UI/UX Design</span>
+<span class="px-3 py-1 bg-primary/20 backdrop-blur-md rounded-full text-xs font-bold border border-white/20">React</span>
+</div>
+<h3 class="headline-font text-3xl md:text-4xl font-black mb-4">Neo-Finans Dashboard</h3>
+<p class="text-lg text-white/90 max-w-xl mb-8 leading-relaxed">
+                            Kullanıcıların karmaşık finansal verileri saniyeler içinde anlamlandırmasını sağlayan, kişiselleştirilebilir widget yapısı ve AI destekli öngörü paneli. %40 daha hızlı işlem yapma kapasitesi hedeflenmiştir.
+                        </p>
+<div class="flex gap-4">
+<a class="flex items-center gap-2 bg-white text-on-surface px-6 py-3 rounded-xl font-bold hover:bg-primary-fixed transition-colors" href="#">
+                                Projeyi İncele
+                                <span class="material-symbols-outlined text-sm">arrow_outward</span>
+</a>
+<a class="flex items-center gap-2 bg-white/10 backdrop-blur-lg text-white px-6 py-3 rounded-xl font-bold border border-white/20 hover:bg-white/20 transition-colors" href="#">
+<span class="material-symbols-outlined">code</span>
+                                Case Study
+                            </a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="bg-surface-container py-24">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-2 md:grid-cols-4 gap-12">
+<div class="text-center">
+<div class="headline-font text-5xl font-black text-primary mb-2">50+</div>
+<div class="text-sm font-bold text-on-surface-variant uppercase tracking-widest">Tamamlanan Proje</div>
+</div>
+<div class="text-center">
+<div class="headline-font text-5xl font-black text-secondary mb-2">12</div>
+<div class="text-sm font-bold text-on-surface-variant uppercase tracking-widest">Tasarım Ödülü</div>
+</div>
+<div class="text-center">
+<div class="headline-font text-5xl font-black text-tertiary mb-2">99%</div>
+<div class="text-sm font-bold text-on-surface-variant uppercase tracking-widest">Müşteri Memnuniyeti</div>
+</div>
+<div class="text-center">
+<div class="headline-font text-5xl font-black text-primary-container mb-2">8</div>
+<div class="text-sm font-bold text-on-surface-variant uppercase tracking-widest">Yıl Deneyim</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-7xl mx-auto px-8 py-32">
+<div class="bg-gradient-to-br from-primary via-primary-container to-secondary rounded-[3rem] p-12 md:p-20 text-white relative overflow-hidden text-center">
+<div class="absolute top-0 left-0 w-full h-full opacity-10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAKei7pLyZDCT7aq8v71sv3D2H8uP3syOkrZQYENEVkeoBOfpmGJulZoBxbEF0y6W8oD9_9rWPXAC9svXF1BMkhamCNdppOlH9SaDrpuF86TVhTFNf6io72iFfw1aqIbWEs9EUYV_8DxfVnmrNo0ix3KlnGP15HuVUhiYJ1xWt4eHq59QoHSjjFV9B4boLVolKqr_nPW7-ljCSFtft42oRMhGmc3kMVLBiTgn58Zw6iSow_Y-V7dFUMyxnQBCmdV3K9wwo-IP70Kk7W');"></div>
+<div class="relative z-10">
+<h2 class="headline-font text-4xl md:text-6xl font-bold mb-8">Sıradaki büyük fikri beraber <br/> hayata geçirelim mi?</h2>
+<p class="text-xl text-white/80 max-w-2xl mx-auto mb-12">Portföyümdeki kalite standartlarını sizin projenize taşımak için bir tık uzağınızdayım.</p>
+<button class="bg-white text-primary px-10 py-4 rounded-full font-black text-lg hover:scale-105 transition-transform shadow-2xl">Proje Başlat</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface border-t border-slate-200/10">
+<div class="max-w-7xl mx-auto px-8 py-12 flex flex-col md:flex-row justify-between items-center">
+<div class="text-lg font-bold text-teal-700 headline-font mb-4 md:mb-0 uppercase">CURATOR</div>
+<div class="text-sm font-medium text-slate-500 mb-4 md:mb-0">
+                © 2024 Liquid Curator Portfolio. Designed for prestige.
+            </div>
+<div class="flex gap-6">
+<a class="text-slate-500 hover:text-teal-500 text-sm font-medium transition-opacity opacity-80 hover:opacity-100" href="#">Privacy</a>
+<a class="text-slate-500 hover:text-teal-500 text-sm font-medium transition-opacity opacity-80 hover:opacity-100" href="#">Terms</a>
+<a class="text-slate-500 hover:text-teal-500 text-sm font-medium transition-opacity opacity-80 hover:opacity-100" href="#">LinkedIn</a>
+<a class="text-slate-500 hover:text-teal-500 text-sm font-medium transition-opacity opacity-80 hover:opacity-100" href="#">GitHub</a>
+</div>
+</div>
+</footer>
+</body></html>
