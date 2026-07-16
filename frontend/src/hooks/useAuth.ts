@@ -162,7 +162,8 @@ export function useAuth() {
     user,
     isLoading,
     isAuthenticated: !!user,
-    isTestSession: !!localStorage?.getItem?.('testSessionToken'),
+    isTestSession:
+      typeof window !== 'undefined' && !!localStorage.getItem('testSessionToken'),
     signIn,
     signUp,
     logout,
