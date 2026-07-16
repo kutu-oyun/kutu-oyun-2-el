@@ -43,14 +43,14 @@ export default function PaymentPage() {
     // Ödeme tokenı al
     const initiatePayment = async () => {
       try {
-        const { data } = await api.post('/payment/create', {
+        const data = await api.payment.create({
           orderId,
           buyer: {
             name: user.displayName,
             email: user.email,
             phone: user.phone,
           },
-        });
+        }) as { success?: boolean; error?: string; token?: string; iframeUrl?: string };
         
         if (data.success) {
           setPaymentData(data);
