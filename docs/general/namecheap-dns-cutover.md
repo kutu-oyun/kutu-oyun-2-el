@@ -51,6 +51,17 @@ Her domain için: **Domain List → MANAGE → Advanced DNS**
 
 ---
 
+## 5. kutuly.com
+
+| Type | Host | Value | TTL |
+|------|------|-------|-----|
+| A Record | `@` | `207.175.26.150` | 5 min |
+| CNAME | `www` | `kutuly.com.` | 5 min |
+
+**Sil:** Vercel / eski Cloud Run CNAME’leri
+
+---
+
 ## DNS sonrası doğrulama (5–15 dk)
 
 ```powershell
@@ -58,6 +69,8 @@ curl.exe -sI https://godivaelix.com/
 curl.exe -sI https://myedura.com/
 curl.exe -sI https://hasanvural.com/
 curl.exe -sI https://bhmcontrol.com/
+curl.exe -sI https://kutuly.com/
+curl.exe -s https://kutuly.com/api/health
 ```
 
 Sonra foodistopia Cloud Run durdur:

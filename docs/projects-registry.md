@@ -8,7 +8,7 @@ Her projenin GitHub görünürlüğü, VM yolu ve dokümantasyon klasörü.
 | hasanvural.com | `Hasan-Vural/hasanvuralcom` | **private** | hasanvural.com | `/opt/apps/hasanvuralcom` | `docs/private/hasanvuralcom/` |
 | BHM Control | `Hasan-Vural/bhmcontrol` | **private** | bhmcontrol.com | `/opt/apps/bhmcontrol` | `docs/private/bhmcontrol/` |
 | Godiva Elix | `Hasan-Vural/godiva-elix` | **private** | godivaelix.com | `/opt/apps/godiva-elix` | `docs/private/godiva-elix/` |
-| Kutuly | `kutu-oyun/kutu-oyun-2-el` | **public** (org) | kutuly.com | `/opt/apps/kutuly` *(plan)* | `docs/public/kutuly/` |
+| Kutuly | `kutu-oyun/kutu-oyun-2-el` | **public** (org) | kutuly.com | `/opt/apps/kutuly` | `docs/public/kutuly/` |
 
 ## Ortak altyapı
 

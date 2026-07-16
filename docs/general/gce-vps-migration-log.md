@@ -54,6 +54,7 @@ Bu dosya tüm migration adımlarının **tarih/saat bazlı** kaydıdır. Diğer 
 | hasanvural.com | hasanvuralcom-api/web | 207.175.26.150 | ✅ |
 | api.hasanvural.com | hasanvuralcom-api | 207.175.26.150 | ✅ |
 | bhmcontrol.com | bhm-api/web | 207.175.26.150 | ✅ |
+| kutuly.com | kutuly-api/web | 207.175.26.150 | ✅ (2026-07-16) |
 
 **Deploy modeli:** Cloud Build yok → `git push` + VM’de `deploy/gce/scripts/deploy-all.sh`
 
@@ -120,5 +121,17 @@ Bkz. [docs-sync-guide.md](./docs-sync-guide.md)
 | ~19:30 | legacy | kutuli@gmail.com gcloud credential yok; free trial bitmiş — Cloud Run/SQL envanteri alınamadı |
 | ~19:40 | docs-hub | `docs/public/kutuly/` + registry/config; GitHub `kutu-oyun/kutu-oyun-2-el` |
 | — | sonraki | VM clone, compose/Caddy, MySQL `kutuly`, DNS cutover |
+
+## 2026-07-16 — Kutuly VPS cutover (canlı)
+
+| Saat (UTC) | Adım | Detay |
+|------------|------|--------|
+| ~21:45 | repo | Dockerfiles, `/api/health`, Next standalone; push `kutu-oyun/kutu-oyun-2-el` |
+| ~21:50 | vm | `/opt/apps/kutuly` clone; MySQL DB/user; `docker-compose.kutuly.yml`; Caddy host |
+| ~21:50 | data | `prisma db push` + seed (kategoriler, ürünler, bypass admin) |
+| ~21:50 | gcs | `gs://hvworkcloud2-kutuly-uploads` |
+| ~21:58 | verify | `https://kutuly.com/` **200**; `/api/health` **ok**; www 200 |
+| — | dns | Namecheap A `@` → `207.175.26.150` (kullanıcı; cutover öncesi yapılmıştı) |
+| — | open | Firebase/PayTR secrets henüz stack.env’de yok |
 
 **Son güncelleme:** 2026-07-16
